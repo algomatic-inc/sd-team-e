@@ -1,0 +1,58 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'python3.10
+
+  Sample SAM Template for sam-app
+
+  '
+Parameters:
+  JobTimeout:
+    Type: Number
+    Default: 180
+    Description: The maximum amount of time (in seconds) for the job to run.
+Globals:
+  Function:
+    Timeout: 10
+    Tracing: Active
+Resources:
+  SearchEmbeddingsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Architectures:
+      - x86_64
+      Role: arn:aws:iam::207567786658:role/AppLambdaExecutionRole
+      Timeout:
+        Ref: JobTimeout
+      FunctionName: search-embeddings-func
+      MemorySize: 2048
+      ImageUri: searchembeddingsfunction:python3.10-v1
+    Metadata:
+      DockerBuildTarget: prod
+      DockerContext: C:\Users\gitar\dev\star-hack\vector_search\search_embeddings_app
+      DockerTag: python3.10-v1
+      Dockerfile: Dockerfile
+      SamResourceId: SearchEmbeddingsFunction
+  SearchEmbeddingsFunctionUrl:
+    Type: AWS::Lambda::Url
+    Properties:
+      AuthType: NONE
+      TargetFunctionArn:
+        Fn::GetAtt:
+        - SearchEmbeddingsFunction
+        - Arn
+      Cors:
+        AllowOrigins:
+        - '*'
+        AllowMethods:
+        - GET
+  SearchEmbeddingsFunctionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunctionUrl
+      FunctionName:
+        Fn::GetAtt:
+        - SearchEmbeddingsFunction
+        - Arn
+      Principal: '*'
+      FunctionUrlAuthType: NONE

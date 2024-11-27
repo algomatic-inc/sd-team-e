@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "star-hack"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+rasterio = "^1.4.2"
+matplotlib = "^3.9.2"
+aiohttp = "^3.11.2"
+pandas = "^2.2.3"
+boto3 = "^1.35.64"
+python-dotenv = "^1.0.1"
+black = "^24.10.0"
+openai = "^1.55.0"
+pydantic = "^2.10.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,9 @@
+POST https://ty665ls8s5.execute-api.ap-northeast-1.amazonaws.com/prod/get-estate-info
+content-type: application/json
+
+
+{
+    "api_key": "",
+    "latitude": 35.7524330,
+    "longitude": 139.6714094
+}

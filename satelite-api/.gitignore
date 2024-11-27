@@ -1,0 +1,27 @@
+# img
+img/*
+
+# output
+output/* 
+
+# rest/output
+rest/output/*
+
+# __pycache__
+__pycache__/*
+
+# .DS_Store
+.DS_Store
+
+# *.ps1
+*.ps1
+
+# 再帰で__pycache__を削除
+**/*/__pycache__/
+
+# .env
+.env
+
+# backup
+backup/*
+

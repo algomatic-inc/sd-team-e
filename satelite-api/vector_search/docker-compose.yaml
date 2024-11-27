@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  search-embeddings-app:
+    build:
+      context: ./search_embeddings_app
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - 8081:8080
+    tty: true
+    stdin_open: true
+    command: >
+      /bin/sh
+    volumes:
+      - ./search_embeddings_app/app.py:/var/task/app.py
+      - ./search_embeddings_app/app_utils/:/var/task/app_utils
+      - ./search_embeddings_app/requirements.txt:/var/task/requirements.txt
+      - ./search_embeddings_app/.vscode:/var/task/.vscode
+    env_file:
+      - .env
